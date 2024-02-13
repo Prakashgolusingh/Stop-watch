@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            *{
+                  margin: 2vh;
+                  border-radius: 10px;
+                  border-width: 1vh;
+            }
+            button{
+                  width: 15vh;
+                  height: 5vh;
+                  cursor: pointer;
+            }
+            body{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-direction: column;
+                  background-color: antiquewhite;
+            }
+      </style>
+</head>
+<body >
+      <h1>Stop Watch</h1>
+      <input type="number" id="data" placeholder="Enter Number" style="height: 4vh;">
+      <div>
+            <button id="start" style="color: green;">Start</button>
+            <button id="stop" style="color: red;">Stop</button>
+            <button id="restart" style="color: blue;">Restart</button>
+      </div>
+      <h2 id="show">0</h2>
+      <script>
+            const number = document.getElementById("data");
+            const start = document.getElementById("start");
+            const stop = document.getElementById("stop");
+            const show = document.getElementById("show");
+            const restart = document.getElementById("restart");
+            let data=0;
+            let variable=0;
+            let change;
+            start.addEventListener("click", startFn);
+            function decrement(){
+                  variable -= 1;
+            }
+            stop.addEventListener("click", stopFn);
+            restart.addEventListener("click", restartFn);
+            function display(){
+                  if(variable<0)
+                        show.innerText = "Invalid Number"
+                  else if(variable == 0)
+                        show.innerText = 0;
+                  else{
+                        show.innerText = variable;
+                        decrement();
+                        change = setTimeout(display, 1000);
+                  }
+            }
+            function startFn(){
+                  if(variable== data){
+                        data = number.value;
+                        console.log(data);
+                        variable = data;
+                        console.log(variable)
+                        display();
+                  }
+                  else
+                        display();
+            }
+
+            function stopFn(){
+                  clearTimeout(change);
+            } 
+            function restartFn(){
+                  change = clearTimeout();
+                  data = 0;
+                  variable=0;
+                  number.value = null;
+                  show.innerText = 0;
+            }
+      </script>
+</body>
+</html>
